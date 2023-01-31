@@ -4,6 +4,7 @@
 // @namespace http://tampermonkey.net/
 // @description Template repo using Webpack and TypeScript to build your userscript for Tampermonkey and more extensions.
 // @homepage https://github.com/pboymt/userscript-typescript-template#readme
+// @license https://opensource.org/licenses/MIT
 // @match https://github.com*
 // @require https://cdn.jsdelivr.net/npm/axios@0.27.2
 // ==/UserScript==
@@ -298,7 +299,7 @@ const button_model_1 = __webpack_require__(14);
 const element_find_1 = __webpack_require__(7);
 const render_fabric_1 = __webpack_require__(15);
 const element_collection_1 = __webpack_require__(8);
-const styles_injecter_1 = __webpack_require__(18);
+const styles_injecter_1 = __webpack_require__(17);
 function addButtons() {
     addThreeDotsButton();
     function addThreeDotsButton() {
@@ -517,26 +518,6 @@ var DeleteResult;
 
 /***/ }),
 /* 17 */
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.stopScheduling = exports.startScheduling = void 0;
-let interval = null;
-const startScheduling = (app) => {
-    interval = setInterval(function () {
-        app.addButtons();
-    }, 5000);
-};
-exports.startScheduling = startScheduling;
-const stopScheduling = () => {
-    clearInterval(interval);
-};
-exports.stopScheduling = stopScheduling;
-
-
-/***/ }),
-/* 18 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -551,8 +532,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StylesInjecter = void 0;
-const styles_scss_1 = __importDefault(__webpack_require__(19));
-const userscript_permissions_guard_1 = __webpack_require__(29);
+const styles_scss_1 = __importDefault(__webpack_require__(18));
+const userscript_permissions_guard_1 = __webpack_require__(28);
 class StylesInjecter {
     injectInit() {
         styles_scss_1.default;
@@ -568,26 +549,26 @@ exports.StylesInjecter = StylesInjecter;
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(21);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(23);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(22);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(24);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(23);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(25);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(24);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_styles_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(26);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_styles_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(25);
 
       
       
@@ -618,7 +599,7 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ ((module) => {
 
 
@@ -727,7 +708,7 @@ module.exports = function (list, options) {
 };
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ ((module) => {
 
 
@@ -802,7 +783,7 @@ function domAPI(options) {
 module.exports = domAPI;
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ ((module) => {
 
 
@@ -846,7 +827,7 @@ function insertBySelector(insert, style) {
 module.exports = insertBySelector;
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
@@ -863,7 +844,7 @@ function setAttributesWithoutAttributes(styleElement) {
 module.exports = setAttributesWithoutAttributes;
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ ((module) => {
 
 
@@ -879,7 +860,7 @@ function insertStyleElement(options) {
 module.exports = insertStyleElement;
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ ((module) => {
 
 
@@ -900,16 +881,16 @@ function styleTagTransform(css, styleElement) {
 module.exports = styleTagTransform;
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(27);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(26);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(28);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(27);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
 // Imports
 
@@ -922,7 +903,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".some-non-existed-element {\n  backgro
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ ((module) => {
 
 
@@ -932,7 +913,7 @@ module.exports = function (i) {
 };
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ ((module) => {
 
 
@@ -1022,7 +1003,7 @@ module.exports = function (cssWithMappingToString) {
 };
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -1043,6 +1024,26 @@ const checkUserscriptPermission = (permissionName) => (target, propertyKey, desc
     return descriptor;
 };
 exports.checkUserscriptPermission = checkUserscriptPermission;
+
+
+/***/ }),
+/* 29 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.stopScheduling = exports.startScheduling = void 0;
+let interval = null;
+const startScheduling = (app) => {
+    interval = setInterval(function () {
+        app.addButtons();
+    }, 5000);
+};
+exports.startScheduling = startScheduling;
+const stopScheduling = () => {
+    clearInterval(interval);
+};
+exports.stopScheduling = stopScheduling;
 
 
 /***/ })
@@ -1126,7 +1127,7 @@ var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const app_1 = __webpack_require__(1);
-const scheduler_1 = __webpack_require__(17);
+const scheduler_1 = __webpack_require__(29);
 const app = new app_1.App();
 (0, scheduler_1.startScheduling)(app);
 

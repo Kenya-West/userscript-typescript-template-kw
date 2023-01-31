@@ -24,6 +24,7 @@ interface UserScriptOptions {
     updateURL: string;
     downloadURL: string;
     supportURL: string;
+    license: string;
     include: string[];
     match: string[];
     exclude: string[];
@@ -131,6 +132,9 @@ export function generateHeader() {
     // Add userscript header's supportURL.
     if (userscript.supportURL) {
         headers.push(`// @supportURL ${userscript.supportURL}`);
+    }// Add userscript header's license.
+    if (userscript.license) {
+        headers.push(`// @license ${userscript.license}`);
     }
     // Add userscript header's includes.
     if (userscript.include && userscript.include instanceof Array) {
