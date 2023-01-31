@@ -4,21 +4,29 @@ import { ButtonIcons } from "./controls/buttons/button.model";
 import { ElementFind, GetElementCollection } from "./element-find/element-find";
 import { RenderAt } from "./render/render.fabric";
 import { ElementCollection } from "./element-find/element-collection";
+import { StylesInjecter } from "./styles/styles-injecter";
 
-export function AddButtons() {
-    // create button
-    const addButtonAddAll = new ButtonControl({
-            id: "sd-add-all",
+export function addButtons() {
+    addThreeDotsButton();
+
+    function addThreeDotsButton() {
+        const addSearchButton = new ButtonControl({
+            id: "sample-button",
             tag: "button",
-            classes: ["btn", "btn-default"],
-            icon: ButtonIcons.glyphiconPicture,
-            text: "Lorem ipsum"
+            classes: ["example-button"],
+            attributes: { "tabindex": "0", "role": "link" },
+            icon: ButtonIcons.none,
+            text: "EXAMPLE BUTTON",
         },
-        ConsoleLogAction.prototype.log,
+        ConsoleLogAction.prototype.run,
         {}).element;
 
-    // find place for button
-    const element = new ElementFind().getElementByElementIdSingle(ElementCollection.Root);
-    // render button
-    new RenderAt().render(addButtonAddAll, element);
+        const element = new ElementFind().getElementByElementIdSingle(ElementCollection.Root);
+        // render button
+        new RenderAt().render(addSearchButton, element);
+    }
+}
+
+export function loadStyles() {
+    new StylesInjecter().injectInit();
 }

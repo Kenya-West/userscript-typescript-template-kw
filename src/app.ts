@@ -3,18 +3,24 @@ import { elementShouldNotExistGuard, elementShouldExistGuard } from "./guards/el
 import { Routes } from "./routing/routes";
 import { GetElementCollection } from "./element-find/element-find";
 import { ElementCollection } from "./element-find/element-collection";
-import { AddButtons } from "./app.facade";
+import { addButtons, loadStyles } from "./app.facade";
+import { Logger } from "./utils/logger";
 
 export class App {
     constructor() {
-        console.log("Скрипт инициализирован!");
+        Logger.log("Script is initialized!");
+        this.initializeFeatures();
     }
 
     @routeGuardIncludes(Routes.root)
-    @elementShouldNotExistGuard("#sd-add-all-public")
+    @elementShouldNotExistGuard("#example-id")
     @elementShouldExistGuard(GetElementCollection.get(ElementCollection.Root)?.selector)
     public addButtons(): void {
-        console.log("addButtons запущен!");
-        AddButtons();
+        Logger.log("addButtons method is working!");
+        addButtons();
+    }
+
+    public initializeFeatures(): void {
+        loadStyles();
     }
 }

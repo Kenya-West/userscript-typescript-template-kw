@@ -1,3 +1,5 @@
+import { Logger } from "../utils/logger";
+
 export const checkUserscriptPermission = (permissionName: string) => (target: Object,
     propertyKey: string,
     descriptor: PropertyDescriptor) => {
@@ -8,7 +10,7 @@ export const checkUserscriptPermission = (permissionName: string) => (target: Ob
         if (typeof (window as any)[permissionName] === "function") {
             originalMethod.apply(this, args);
         } else {
-            console.error(`${permissionName} is not defined`);
+            Logger.error(`${permissionName} is not defined`);
             return;  
         }
     };
