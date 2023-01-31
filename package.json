@@ -1,12 +1,14 @@
 {
   "name": "userscript-typescript-template-kw",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Template repo using Webpack and TypeScript to build your userscript for Tampermonkey and more extensions.",
   "main": "userscript/index.user.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "build:watch": "webpack --watch"
+    "build:dev": "npx cross-env ENV=development webpack",
+    "build:prod": "npx cross-env ENV=production webpack",
+    "build:watch": "npm run build:watch:dev",
+    "build:watch:dev": "npx cross-env ENV=development webpack --watch",
+    "build:watch:prod": "npx cross-env ENV=production webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,13 @@
     "@types/tampermonkey": "^4.0.5",
     "@types/webpack": "^5.28.0",
     "axios-userscript-adapter": "^0.1.12",
+    "crossenv": "^0.0.2-security",
+    "css-loader": "^6.7.3",
+    "dotenv": "^16.0.3",
     "prettier": "^2.7.1",
+    "sass": "^1.57.1",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.6",
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",

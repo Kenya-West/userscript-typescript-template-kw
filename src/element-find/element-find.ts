@@ -9,14 +9,23 @@ export class ElementFind {
         this.contextElement = contextElement;
     }
 
-    public getSingle(query: ElementCollectionModel): SourceElementModel {
-        return this.getElementSingle(query);
+    public getElementByQuerySingle(query: string): SourceElementModel {
+        return this._queryGet(query);
     }
-    public getMultiple(query: ElementCollectionModel): SourceElementModel[] {
-        return this.getElementMultiple(query);
+    public getElementByQueryMultiple(query: string): SourceElementModel[] {
+        return this._queryGetMultiple(query);
+    }
+    public getElementByElementIdSingle(query: ElementCollection): SourceElementModel {
+        return this._getByElementCollection(GetElementCollection.get(query)!);
     }
 
-    private getElementSingle(query: ElementCollectionModel): SourceElementModel {
+    private _queryGetMultiple(query: string): SourceElementModel[] {
+        return Array.from(this.contextElement.querySelectorAll(query)) as SourceElementModel[];
+    }
+    private _queryGet(query: string): SourceElementModel {
+        return this.contextElement.querySelector(query) as SourceElementModel;
+    }
+    private _getByElementCollection(query: ElementCollectionModel): SourceElementModel {
         // your implementation for specific cases
         if (query.id !== ElementCollection.Root) {
             const elem = this.contextElement.querySelector(".viewport__content-section .modal-body .panel-group")?.parentNode?.parentNode?.querySelector(".control-label") as HTMLElement;
@@ -27,7 +36,7 @@ export class ElementFind {
 
         return this.contextElement.querySelector(query.selector) as SourceElementModel;
     }
-    private getElementMultiple(query: ElementCollectionModel): SourceElementModel[] {
+    private _getElementMultiple(query: ElementCollectionModel): SourceElementModel[] {
         return Array.from(this.contextElement.querySelectorAll(query.selector));
     }
 }

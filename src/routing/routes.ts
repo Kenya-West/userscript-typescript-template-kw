@@ -1,3 +1,3 @@
 export enum Routes {
-    IM = "/im"
+    root = "/"
 }

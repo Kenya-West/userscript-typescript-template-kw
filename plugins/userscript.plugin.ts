@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import path, { join } from 'path';
+import { Compilation, Compiler, sources } from 'webpack';
 
 /**
  * Userscript's all headers.
@@ -163,8 +164,8 @@ export function generateHeader() {
             const dependencyVersion = packageJson.dependencies[dependencyName].replace(dependencyVersionRegExp, '');
             headers.push(
                 requireTemplate
-                    .replace('{dependencyName}', dependencyName)
-                    .replace('{dependencyVersion}', dependencyVersion)
+                    .replace('\${dependencyName}', dependencyName)
+                    .replace('\${dependencyVersion}', dependencyVersion)
             );
         }
     }
@@ -213,4 +214,36 @@ export function generateHeader() {
     // Userscript header's ending.
     headers.push('// ==/UserScript==\n')
     return headers.join('\n');
+}
+
+/**
+ * Adds `// @require <path to hot-reload userscript file>` line 
+ * 
+ * @returns A string that contains a path to the hot reload file with `require` field.
+ */
+
+export class GeneratePathToUserscriptPlugin {
+    apply(compiler: Compiler) {
+        compiler.hooks.thisCompilation.tap("GeneratePathToUserscriptPlugin", (compilation) => {
+            compilation.hooks.processAssets.tap(
+              {
+                name: "Replace",
+                stage: Compilation.PROCESS_ASSETS_STAGE_OPTIMIZE,
+              },
+              () => {
+                const file = compilation.getAsset("index.hot-reload.user.js");
+                if (file) {
+                    const requireString = generatePathToUserscript();
+                    compilation.updateAsset(
+                      "index.hot-reload.user.js",
+                      new sources.RawSource((file.source.source() as string).replace(/(\n\/\/ ==\/UserScript==)/ig, `\n${requireString}$1`))
+                    );
+                }
+              }
+            );
+          });
+    }
+}
+function generatePathToUserscript(): string {
+    return `// @require file://${path.resolve(__dirname, '..' ,'userscript', 'index.user.js')}`;
 }

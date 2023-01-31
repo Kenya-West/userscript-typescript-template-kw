@@ -1,16 +1,21 @@
+import { Logger } from "../utils/logger";
 import { DeleteResult, RenderDataModel, RenderResult, SourceElementModel } from "./render.model";
 
 export class RenderAt {
     /**
      * render
      */
-    public render(element: SourceElementModel, place: SourceElementModel): SourceElementModel | RenderResult {
+    public render(element: SourceElementModel, place: SourceElementModel, renderBefore?: SourceElementModel): SourceElementModel | RenderResult {
         if (place && element) {
-            place.appendChild(element);
-            console.log(`Зарендерил "${element?.innerText ?? 'элемент'}"!`);
+            if (renderBefore) {
+                place.insertBefore(element, renderBefore);
+            } else {
+                place.appendChild(element);
+            }
+            Logger.log(`Зарендерил "${element?.innerText || `элемент с тегом "${element?.tagName}"`}"!`);
             return element;
         } else {
-            console.log("Хуёво, нихуя не зарендерил")
+            Logger.log("Хуёво, нихуя не зарендерил")
             return RenderResult.NOELEMENT;
         }
     }
