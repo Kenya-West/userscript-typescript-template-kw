@@ -4,6 +4,7 @@ import { RenderParamsModel, RenderResult, SourceElementModel } from "../render/r
 import { ControlCollectionEntryModel, RenderPlaceModel } from "./control-collection.model";
 import { ControlBase } from "./control-base.control";
 import { ElementFindService } from "../element-find/element-find.service";
+import { Logger } from "../utils/logger";
 
 @singleton()
 export class ControlComposeService {
@@ -14,8 +15,7 @@ export class ControlComposeService {
         return this.render(control, renderAt ?? controlModel.defaultRenderAt);
     }
     public compose(controlModel: ControlCollectionEntryModel): ControlBase {
-        const control = new (controlModel as any).class(controlModel.controlParams);
-        (control as ControlBase).element.addEventListener("click", controlModel.callback.bind(controlModel.args), false);
+        const control = new (controlModel as any).class(controlModel.controlParams, controlModel.callback, controlModel.args);
         return control;
     }
     public render(control: ControlBase, renderAt: RenderPlaceModel): SourceElementModel | RenderResult {

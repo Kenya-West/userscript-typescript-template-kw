@@ -6,10 +6,8 @@ import { RenderService } from "./render/render.service";
 import { ElementCollection } from "./element-find/element-collection";
 import { StylesInjecterService } from "./styles/styles-injecter.service";
 import { container, singleton } from "tsyringe";
-import { HooksRegistry } from "./hooks/hooks-registry.service";
-import { HookType } from "./hooks/hook-type";
-import { OnInit } from "./hooks/on-init.hook";
 import { CustomMethodsService } from "./custom/custom-methods.service";
+import { Logger } from "./utils/logger";
 
 @singleton()
 export class AppFacade {
@@ -31,10 +29,7 @@ export class AppFacade {
     }
     private initCustomService() {
         const instance = container.resolve<CustomMethodsService>(CustomMethodsService);
-        
-        HooksRegistry.getInstancesByHookType(HookType.OnInit).forEach((instance) => {
-            (instance.instance as OnInit).ustOnInit();
-          });
+        instance.init();   
     }
 
     /**
