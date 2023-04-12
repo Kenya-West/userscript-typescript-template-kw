@@ -11,7 +11,6 @@ export class CustomMethodsService {
     public init() {
         const controlService = container.resolve<ControlComposeService>(ControlComposeService);
         // TODO: Remove `any`
-        Logger.log(`\n Composing control... \n`);
         controlService.composeAndRender(ControlCollection.exampleButton as any);
     }
 }

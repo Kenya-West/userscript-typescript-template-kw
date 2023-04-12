@@ -1161,7 +1161,7 @@ const logger_1 = __webpack_require__(41);
 const tsyringe_1 = __webpack_require__(5);
 class App {
     constructor() {
-        logger_1.Logger.log("Script is initialized!");
+        logger_1.Logger.log("🔵 Script is initialized!");
         this.facadeInstance = tsyringe_1.container.resolve(app_facade_1.AppFacade);
         this.initializeFeatures();
     }
@@ -2884,11 +2884,11 @@ let RenderService = class RenderService {
             else {
                 params.place.appendChild(params.element);
             }
-            logger_1.Logger.log(`Зарендерил "${((_a = params.element) === null || _a === void 0 ? void 0 : _a.innerText) || `элемент с тегом "${(_b = params.element) === null || _b === void 0 ? void 0 : _b.tagName}"`}"!`);
+            logger_1.Logger.log(`ℹ️ Rendered "${((_a = params.element) === null || _a === void 0 ? void 0 : _a.innerText) || `an element with tag "${(_b = params.element) === null || _b === void 0 ? void 0 : _b.tagName}"`}"`);
             return params.element;
         }
         else {
-            logger_1.Logger.log("Хуёво, нихуя не зарендерил");
+            logger_1.Logger.log("🔴 Nothing was rendered. The most likely reason: no element to render in", "warn");
             return render_model_1.RenderResult.NOELEMENT;
         }
     }
@@ -3566,14 +3566,12 @@ exports.CustomMethodsService = void 0;
 const tsyringe_1 = __webpack_require__(5);
 const control_compose_service_1 = __webpack_require__(59);
 const control_collection_1 = __webpack_require__(60);
-const logger_1 = __webpack_require__(41);
 let CustomMethodsService = class CustomMethodsService {
     constructor() {
         this.init();
     }
     init() {
         const controlService = tsyringe_1.container.resolve(control_compose_service_1.ControlComposeService);
-        logger_1.Logger.log(`\n Composing control... \n`);
         controlService.composeAndRender(control_collection_1.ControlCollection.exampleButton);
     }
 };

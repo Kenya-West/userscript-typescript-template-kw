@@ -11,7 +11,7 @@ export class App {
     private facadeInstance: AppFacade;
     
     constructor() {
-        Logger.log("Script is initialized!");
+        Logger.log("🔵 Script is initialized!");
         this.facadeInstance = container.resolve<AppFacade>(AppFacade);
         this.initializeFeatures();
     }

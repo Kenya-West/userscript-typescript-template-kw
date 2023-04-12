@@ -14,10 +14,10 @@ export class RenderService {
             } else {
                 params.place.appendChild(params.element);
             }
-            Logger.log(`Зарендерил "${params.element?.innerText || `элемент с тегом "${params.element?.tagName}"`}"!`);
+            Logger.log(`ℹ️ Rendered "${params.element?.innerText || `an element with tag "${params.element?.tagName}"`}"`);
             return params.element;
         } else {
-            Logger.log("Хуёво, нихуя не зарендерил")
+            Logger.log("🔴 Nothing was rendered. The most likely reason: no element to render in", "warn")
             return RenderResult.NOELEMENT;
         }
     }
