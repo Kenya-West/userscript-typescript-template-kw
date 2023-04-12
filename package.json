@@ -1,6 +1,6 @@
 {
   "name": "userscript-typescript-template-kw",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Template repo using Webpack and TypeScript to build your userscript for Tampermonkey and more extensions.",
   "main": "userscript/index.user.js",
   "scripts": {
@@ -31,12 +31,14 @@
     "css-loader": "^6.7.3",
     "dotenv": "^16.0.3",
     "prettier": "^2.7.1",
+    "reflect-metadata": "^0.1.13",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.6",
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
+    "tsyringe": "^4.7.0",
     "typescript": "^4.5.2",
     "webpack": "^5.64.3",
     "webpack-cli": "^4.9.1"

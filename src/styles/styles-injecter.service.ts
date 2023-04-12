@@ -1,7 +1,9 @@
 import style from "../assets/styles/styles.scss";
 import { checkUserscriptPermission } from "../guards/userscript-permissions.guard";
+import { singleton } from "tsyringe";
 
-export class StylesInjecter {
+@singleton()
+export class StylesInjecterService {
     // this is the style element that will be injected into the DOM at script"s start
     public injectInit() {
         style;
