@@ -1211,7 +1211,6 @@ let AppFacade = class AppFacade {
     }
     initCustomService() {
         const instance = tsyringe_1.container.resolve(custom_methods_service_1.CustomMethodsService);
-        instance.init();
     }
     enableStyles() {
         const instance = tsyringe_1.container.resolve(styles_injecter_service_1.StylesInjecterService);

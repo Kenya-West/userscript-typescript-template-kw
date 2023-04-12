@@ -29,7 +29,6 @@ export class AppFacade {
     }
     private initCustomService() {
         const instance = container.resolve<CustomMethodsService>(CustomMethodsService);
-        instance.init();   
     }
 
     /**
