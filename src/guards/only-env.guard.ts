@@ -16,3 +16,14 @@ export const EnvGuard = (envs: Environment[]) => (target: Object,
   
     return descriptor;
   };
+
+export const EnvGuardFunction = (envs: Environment[]): boolean => {
+  let result = false;
+
+  const url = new URL(location.href)
+  if (envs.includes((process.env.scriptEnvs as unknown as ScriptsEnvsModel).ENV)) {
+    result = true;
+  }
+  return result;
+}
+

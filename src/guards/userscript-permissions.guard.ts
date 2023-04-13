@@ -17,3 +17,12 @@ export const checkUserscriptPermission = (permissionName: string) => (target: Ob
   
     return descriptor;
   };
+
+// rewrite checkUserscriptPermission function without decorator payload and without comments. It returns boolean
+export const checkUserscriptPermissionFunction = (permissionName: string): boolean => {
+    let result = false;
+    if (typeof (window as any)[permissionName] === "function") {
+        result = true;
+    }
+    return result;
+}

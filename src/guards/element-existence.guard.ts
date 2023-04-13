@@ -43,3 +43,31 @@ export const elementShouldExistGuard = (selector?: string) => (target: Object,
 
   return descriptor;
 };
+
+export const elementShouldNotExistGuardFunction = (selector: string): boolean => {
+  let result = false;
+  
+  if (selector) { 
+    if (document.querySelector(selector) === null) {
+      result = true;
+      Logger.log("🟢 Checking element should not have been existing... Element not existed... Function shall proceed to execute");
+    } else {
+      Logger.log("🟠 Checking element should not have been existing... Element existed... Function shall not execute");
+    }
+  };
+  return result;  
+};
+
+export const elementShouldExistGuardFunction = (selector?: string): boolean => {
+  let result = false;
+  
+  if (selector) {
+    if (document.querySelector(selector) !== null) {
+          result = true;
+          Logger.log("🟢 Checking element should have been existing... Element exists... Function shall proceed to execute");
+        } else {
+          Logger.log("🟠 Checking element should have been existing... Element does not exist... Function shall not execute");
+        }
+  }
+  return result;
+};

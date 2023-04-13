@@ -1,7 +1,7 @@
 import { container, singleton } from "tsyringe";
 import { RenderService } from "../render/render.service";
 import { RenderParamsModel, RenderResult, SourceElementModel } from "../render/render.model";
-import { ControlCollectionEntryModel, RenderPlaceModel } from "./control-collection.model";
+import { ControlCollectionEntryModel, GuardsPayloadModel, RenderPlaceModel } from "./control-collection.model";
 import { ControlBase } from "./control-base.control";
 import { ElementFindService } from "../element-find/element-find.service";
 import { Logger } from "../utils/logger";
@@ -12,18 +12,19 @@ export class ControlComposeService {
 
     public composeAndRender(controlModel: ControlCollectionEntryModel, renderAt?: RenderPlaceModel): SourceElementModel | RenderResult {
         const control = this.compose(controlModel);
-        return this.render(control, renderAt ?? controlModel.defaultRenderAt);
+        return this.render(control, renderAt ?? controlModel.defaultRenderAt, controlModel.guards);
     }
     public compose(controlModel: ControlCollectionEntryModel): ControlBase {
         const control = new (controlModel as any).class(controlModel.controlParams, controlModel.callback, controlModel.args);
         return control;
     }
-    public render(control: ControlBase, renderAt: RenderPlaceModel): SourceElementModel | RenderResult {
+    public render(control: ControlBase, renderAt: RenderPlaceModel, guards?: GuardsPayloadModel): SourceElementModel | RenderResult {
         const renderService = container.resolve<RenderService>(RenderService);
         const elementFindService = container.resolve<ElementFindService>(ElementFindService);
         const renderPayload: RenderParamsModel = {
             element: control.element,
-            place: getRenderElement(renderAt.place)
+            place: getRenderElement(renderAt.place),
+            guards,
         };
 
         if (renderAt.insertBefore) {
