@@ -52,7 +52,7 @@ export class RenderService {
             () => params.guards?.routes !== undefined ? params.guards?.routes.filter(route => routeGuardIncludesFunction(route) === true)?.length > 0 : true,
             () => params.guards?.elementShouldExist?.every(elem => elementShouldExistGuardFunction(elem.selector) === true) ?? true,
             () => params.guards?.elementShouldNotExist?.every(elem => elementShouldNotExistGuardFunction(elem.selector) === true) ?? true,
-            () => params.guards?.unique === true ? elementShouldNotExistGuardFunction(params.element?.id) === true : true
+            () => params.guards?.unique === true ? elementShouldNotExistGuardFunction(params.element?.id ? `#${params.element.id}` : ``) === true : true
           ];
 
         // let result = false;
