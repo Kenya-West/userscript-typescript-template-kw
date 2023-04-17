@@ -10,10 +10,10 @@ export const elementShouldNotExistGuard = (selector: string) => (target: Object,
       const url = new URL(location.href)
     
       if (document.querySelector(selector) === null) {
-        Logger.log("Проверка отсутствия элемента... Элемента нет... ОК");
+        Logger.log(`🟢 Checking element with selector "${selector}" should not have been existing... Element not existed... Function shall proceed to execute`);
         originalMethod.apply(this, args);
       } else {
-        Logger.log("Проверка отсутствия элемента... Элемент есть... Плохо");
+        Logger.log(`🟠 Checking element with selector "${selector}" should not have been existing... Element existed... Function shall not execute`);
         return;
       }
     };
@@ -31,10 +31,10 @@ export const elementShouldExistGuard = (selector?: string) => (target: Object,
   descriptor.value = function (...args: any) {
     if (selector) {
       if (document.querySelector(selector) !== null) {
-        Logger.log("Проверка наличия элемента... Элемент есть... ОК");
+        Logger.log(`🟢 Checking element with selector "${selector}" should have been existing... Element exists... Function shall proceed to execute`);
         originalMethod.apply(this, args);
       } else {
-        Logger.log("Проверка наличия элемента... Элемента нет. Плохо");
+        Logger.log(`🟠 Checking element with selector "${selector}" should have been existing... Element does not exist... Function shall not execute`);
         return;
       }
     }
@@ -42,4 +42,32 @@ export const elementShouldExistGuard = (selector?: string) => (target: Object,
   };
 
   return descriptor;
+};
+
+export const elementShouldNotExistGuardFunction = (selector: string): boolean => {
+  let result = false;
+  
+  if (selector) { 
+    if (document.querySelector(selector) === null) {
+      result = true;
+      Logger.log(`🟢 Checking element with selector "${selector}" should not have been existing... Element not existed... Function shall proceed to execute`);
+    } else {
+      Logger.log(`🟠 Checking element with selector "${selector}" should not have been existing... Element existed... Function shall not execute`);
+    }
+  };
+  return result;  
+};
+
+export const elementShouldExistGuardFunction = (selector?: string): boolean => {
+  let result = false;
+  
+  if (selector) {
+    if (document.querySelector(selector) !== null) {
+          result = true;
+          Logger.log(`🟢 Checking element with selector "${selector}" should have been existing... Element exists... Function shall proceed to execute`);
+        } else {
+          Logger.log(`🟠 Checking element with selector "${selector}" should have been existing... Element does not exist... Function shall not execute`);
+        }
+  }
+  return result;
 };

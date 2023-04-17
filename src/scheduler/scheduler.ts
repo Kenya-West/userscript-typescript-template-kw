@@ -5,7 +5,7 @@ let interval: unknown = null;
 // this is the timer which is invoking method of App to render buttons
 export const startScheduling = (app: App) => {
     interval = setInterval(function() {
-        app.addButtons();
+        // app.addButtons();
     }, 5000);
 }
 

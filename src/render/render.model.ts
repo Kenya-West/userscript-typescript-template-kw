@@ -1,3 +1,5 @@
+import { GuardsPayloadModel } from "../controls/control-collection.model";
+
 export interface RenderDataModel {
     beforeElem: HTMLElement;
     afterElem?: HTMLElement;
@@ -6,6 +8,15 @@ export interface RenderDataModel {
     id?: string;
     styles: {key: string; value: string | number}[];
 }
+
+export interface RenderParamsModel {
+    element: SourceElementModel;
+    place: SourceElementModel;
+    renderBefore?: SourceElementModel;
+    guards?: GuardsPayloadModel;
+}
+
+export type RemoveParamsModel = SourceElementModel;
 
 export type SourceElementModel = HTMLElement;
 

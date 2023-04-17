@@ -1,32 +1,42 @@
 import { ConsoleLogAction } from "./actions/console-log.action";
 import { ButtonControl } from "./controls/buttons/button/button.control";
 import { ButtonIcons } from "./controls/buttons/button.model";
-import { ElementFind, GetElementCollection } from "./element-find/element-find";
-import { RenderAt } from "./render/render.fabric";
+import { ElementFindService, GetElementCollection } from "./element-find/element-find.service";
+import { RenderService } from "./render/render.service";
 import { ElementCollection } from "./element-find/element-collection";
-import { StylesInjecter } from "./styles/styles-injecter";
+import { StylesInjecterService } from "./styles/styles-injecter.service";
+import { container, singleton } from "tsyringe";
+import { CustomMethodsService } from "./custom/custom-methods.service";
+import { Logger } from "./utils/logger";
 
-export function addButtons() {
-    addThreeDotsButton();
+@singleton()
+export class AppFacade {
+    public enabledFeatures: Record<string, boolean> = {};
 
-    function addThreeDotsButton() {
-        const addSearchButton = new ButtonControl({
-            id: "sample-button",
-            tag: "button",
-            classes: ["example-button"],
-            attributes: { "tabindex": "0", "role": "link" },
-            icon: ButtonIcons.none,
-            text: "EXAMPLE BUTTON",
-        },
-        ConsoleLogAction.prototype.run,
-        {}).element;
-
-        const element = new ElementFind().getElementByElementIdSingle(ElementCollection.Root);
-        // render button
-        new RenderAt().render(addSearchButton, element);
+    constructor() {
+        this.enableElementServices();
+        this.enableRenderService();
+        this.initCustomService();
     }
-}
 
-export function loadStyles() {
-    new StylesInjecter().injectInit();
+    private enableElementServices(): void {
+        const instance = container.resolve<ElementFindService>(ElementFindService);
+        this.enabledFeatures.element = true;
+    }
+    private enableRenderService(): void {
+        const instance = container.resolve<RenderService>(RenderService);
+        this.enabledFeatures.render = true;
+    }
+    private initCustomService() {
+        const instance = container.resolve<CustomMethodsService>(CustomMethodsService);
+    }
+
+    /**
+     * Includes SCSS styles in bundle
+     */
+    public enableStyles() {
+        const instance = container.resolve<StylesInjecterService>(StylesInjecterService);
+        instance.injectInit();
+        this.enabledFeatures.styles = true; // TODO: move to decorator
+    }
 }

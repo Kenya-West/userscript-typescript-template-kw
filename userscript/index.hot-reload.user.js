@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name Userscript TypeScript Template by Kenya-West
-// @version 1.1.1
+// @version 1.2.0
 // @namespace http://tampermonkey.net/
 // @description Template repo using Webpack and TypeScript to build your userscript for Tampermonkey and more extensions.
 // @homepage https://github.com/pboymt/userscript-typescript-template#readme
