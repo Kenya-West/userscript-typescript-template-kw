@@ -70,22 +70,22 @@ You can push your userscript to [Github](https://github.com) and import it to [G
 
 ## Roadmap
 
-### Add proper DI, or prefer `static` classes
+### ✅ Add proper DI, or prefer `static` classes
 
-Currently, some classes need to be instantiated, some have static method. Choose one unified way to call them.
+Now solved. Classes use `tsyringe` library to get instatiated.
 
-### Make repository-based method to store custom ids of elements
+### 🕒 Make repository-based method to store custom ids of elements
 
 If you create elements, you need to remember which strings to use. You can confuse them. Make a way to pre-define and reuse strings of ids of custom HTML elements.
 
-### Do we need abstract classes of custom elements?
+### 🕒 Do we need abstract classes of custom elements?
 
 Currently, to create a custom HTML element, you need to create an abstract class, then a base class, and then finally, final class of your element. Why do we need 3 steps to make it?
 
-### Make generic HTML element
+### 🕒 Make generic HTML element
 
 Some HTML element just need a base control methods and that's it. Make a general custom HTML element class.
 
-### Make a wiki with how-to section
+### 🕒 Make a wiki with how-to section
 
 Strangers may be lost with so many classes. What the proper way to create custom HTML element? How to add custom styles? How to add support for custom file types? Add an action? What is this for? This is where ~~the fun begins~~ we need clear misunderstanding.
