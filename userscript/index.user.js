@@ -2917,7 +2917,7 @@ let RenderService = class RenderService {
             () => { var _a, _b, _c; return ((_a = params.guards) === null || _a === void 0 ? void 0 : _a.routes) !== undefined ? ((_c = (_b = params.guards) === null || _b === void 0 ? void 0 : _b.routes.filter(route => (0, route_guard_1.routeGuardIncludesFunction)(route) === true)) === null || _c === void 0 ? void 0 : _c.length) > 0 : true; },
             () => { var _a, _b, _c; return (_c = (_b = (_a = params.guards) === null || _a === void 0 ? void 0 : _a.elementShouldExist) === null || _b === void 0 ? void 0 : _b.every(elem => (0, element_existence_guard_1.elementShouldExistGuardFunction)(elem.selector) === true)) !== null && _c !== void 0 ? _c : true; },
             () => { var _a, _b, _c; return (_c = (_b = (_a = params.guards) === null || _a === void 0 ? void 0 : _a.elementShouldNotExist) === null || _b === void 0 ? void 0 : _b.every(elem => (0, element_existence_guard_1.elementShouldNotExistGuardFunction)(elem.selector) === true)) !== null && _c !== void 0 ? _c : true; },
-            () => { var _a, _b; return ((_a = params.guards) === null || _a === void 0 ? void 0 : _a.unique) === true ? (0, element_existence_guard_1.elementShouldNotExistGuardFunction)((_b = params.element) === null || _b === void 0 ? void 0 : _b.id) === true : true; }
+            () => { var _a, _b; return ((_a = params.guards) === null || _a === void 0 ? void 0 : _a.unique) === true ? (0, element_existence_guard_1.elementShouldNotExistGuardFunction)(((_b = params.element) === null || _b === void 0 ? void 0 : _b.id) ? `#${params.element.id}` : ``) === true : true; }
         ];
         let result = false;
         if (performCascadeCheck(checks)) {
@@ -3094,6 +3094,7 @@ const routeGuardIncludesFunction = (route) => {
     let result = false;
     const url = new URL(location.href);
     if (url.toString().includes(route)) {
+        logger_1.Logger.log(`🟢 Provided routes match with current path ${url.toString()}`);
         result = true;
     }
     else {
@@ -3119,11 +3120,11 @@ const elementShouldNotExistGuard = (selector) => (target, propertyKey, descripto
         if (selector) {
             const url = new URL(location.href);
             if (document.querySelector(selector) === null) {
-                logger_1.Logger.log("🟢 Checking element should not have been existing... Element not existed... Function shall proceed to execute");
+                logger_1.Logger.log(`🟢 Checking element with selector "${selector}" should not have been existing... Element not existed... Function shall proceed to execute`);
                 originalMethod.apply(this, args);
             }
             else {
-                logger_1.Logger.log("🟠 Checking element should not have been existing... Element existed... Function shall not execute");
+                logger_1.Logger.log(`🟠 Checking element with selector "${selector}" should not have been existing... Element existed... Function shall not execute`);
                 return;
             }
         }
@@ -3138,11 +3139,11 @@ const elementShouldExistGuard = (selector) => (target, propertyKey, descriptor) 
     descriptor.value = function (...args) {
         if (selector) {
             if (document.querySelector(selector) !== null) {
-                logger_1.Logger.log("🟢 Checking element should have been existing... Element exists... Function shall proceed to execute");
+                logger_1.Logger.log(`🟢 Checking element with selector "${selector}" should have been existing... Element exists... Function shall proceed to execute`);
                 originalMethod.apply(this, args);
             }
             else {
-                logger_1.Logger.log("🟠 Checking element should have been existing... Element does not exist... Function shall not execute");
+                logger_1.Logger.log(`🟠 Checking element with selector "${selector}" should have been existing... Element does not exist... Function shall not execute`);
                 return;
             }
         }
@@ -3156,10 +3157,10 @@ const elementShouldNotExistGuardFunction = (selector) => {
     if (selector) {
         if (document.querySelector(selector) === null) {
             result = true;
-            logger_1.Logger.log("🟢 Checking element should not have been existing... Element not existed... Function shall proceed to execute");
+            logger_1.Logger.log(`🟢 Checking element with selector "${selector}" should not have been existing... Element not existed... Function shall proceed to execute`);
         }
         else {
-            logger_1.Logger.log("🟠 Checking element should not have been existing... Element existed... Function shall not execute");
+            logger_1.Logger.log(`🟠 Checking element with selector "${selector}" should not have been existing... Element existed... Function shall not execute`);
         }
     }
     ;
@@ -3171,10 +3172,10 @@ const elementShouldExistGuardFunction = (selector) => {
     if (selector) {
         if (document.querySelector(selector) !== null) {
             result = true;
-            logger_1.Logger.log("🟢 Checking element should have been existing... Element exists... Function shall proceed to execute");
+            logger_1.Logger.log(`🟢 Checking element with selector "${selector}" should have been existing... Element exists... Function shall proceed to execute`);
         }
         else {
-            logger_1.Logger.log("🟠 Checking element should have been existing... Element does not exist... Function shall not execute");
+            logger_1.Logger.log(`🟠 Checking element with selector "${selector}" should have been existing... Element does not exist... Function shall not execute`);
         }
     }
     return result;
@@ -3747,6 +3748,19 @@ let CustomMethodsService = class CustomMethodsService {
         this.init();
     }
     init() {
+        this.startTimer(500);
+    }
+    startTimer(time) {
+        this.interval = setInterval(() => {
+            this.renderButton();
+        }, time);
+    }
+    stopTimer() {
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
+    }
+    renderButton() {
         const controlService = tsyringe_1.container.resolve(control_compose_service_1.ControlComposeService);
         controlService.composeAndRender(control_collection_1.ControlCollection.exampleButton);
     }
