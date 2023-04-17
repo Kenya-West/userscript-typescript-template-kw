@@ -48,6 +48,7 @@ export const routeGuardIncludesFunction = (route: Routes): boolean => {
   let result = false;
   const url = new URL(location.href)
     if (url.toString().includes(route)) {
+      Logger.log(`🟢 Provided routes match with current path ${url.toString()}`);
       result = true;
     } else {
       Logger.log(`🟠 Provided routes do not match with current path ${url.toString()}`, "warn");
