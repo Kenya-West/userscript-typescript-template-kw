@@ -48,7 +48,9 @@
     "require-template": "https://cdn.jsdelivr.net/npm/${dependencyName}@${dependencyVersion}",
     "namespace": "http://tampermonkey.net/",
     "license": "https://opensource.org/licenses/MIT",
-    "match": ["http*://motherfuckingwebsite.com/*"],
+    "match": [
+      "http*://motherfuckingwebsite.com/*"
+    ],
     "run-at": "document-end",
     "connect": [],
     "require": [],
