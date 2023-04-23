@@ -1,9 +1,10 @@
 import path from "path";
-import { Configuration, BannerPlugin, DefinePlugin } from "webpack";
 import TerserPlugin from "terser-webpack-plugin";
-import { generateHeader, GeneratePathToUserscriptPlugin } from "./plugins/userscript.plugin";
 import * as dotenv from "dotenv";
+import { Configuration, BannerPlugin, DefinePlugin } from "webpack";
+import { generateHeader, GeneratePathToUserscriptPlugin } from "./plugins/userscript.plugin";
 import { Environment } from "./src/environment/environment.model";
+import * as packageJson from "./package.json";
 
 const env = process.env.ENV as Environment || "development";
 const envContents = dotenv.config({ path: `.env.${env}`, override: true });
@@ -25,7 +26,9 @@ const configCommon: Configuration = {
         extensions: [".ts", ".js"],
     },
     externals: {
-        axios: "axios",
+        ...Object.fromEntries(Object.keys(packageJson.dependencies).map(key => [key, key]))
+        // "reflect-metadata": "reflect-metadata",
+        // "tsyringe": "tsyringe",
     },
     plugins: [
         new BannerPlugin({
