@@ -84,7 +84,7 @@ module.exports = {
                 "import/newline-after-import": "error",
                 "import/no-duplicates": "error",
                 "prettier/prettier": [
-                    "warn",
+                    "off",
                     {
                         endOfLine: "auto"
                     }
@@ -151,6 +151,7 @@ module.exports = {
                 "@typescript-eslint/no-parameter-properties": "off",
                 "@typescript-eslint/no-unsafe-assignment": "warn",
                 "@typescript-eslint/no-unsafe-member-access": "warn",
+                "@typescript-eslint/no-unused-vars": "off",
                 "@typescript-eslint/no-unused-expressions": "error",
                 "@typescript-eslint/no-useless-constructor": ["error"],
                 "@typescript-eslint/no-use-before-define": "off",
@@ -184,7 +185,6 @@ module.exports = {
                 "import/no-deprecated": "warn",
                 "jsdoc/check-alignment": "error",
                 "jsdoc/check-indentation": "error",
-                "jsdoc/newline-after-description": "error",
                 "jsdoc/no-types": "error",
                 "max-classes-per-file": "off",
                 "max-len": [
@@ -245,14 +245,7 @@ module.exports = {
                 "prefer-const": "error",
                 "quote-props": ["error", "as-needed"],
                 radix: "off",
-                "space-before-function-paren": [
-                    "error",
-                    {
-                        anonymous: "never",
-                        asyncArrow: "always",
-                        named: "never"
-                    }
-                ],
+                "space-before-function-paren": ["error", "never"],
                 "spaced-comment": [
                     "error",
                     "always",
