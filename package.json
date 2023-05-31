@@ -8,7 +8,13 @@
     "build:prod": "npx cross-env ENV=production webpack",
     "build:watch": "npm run build:watch:dev",
     "build:watch:dev": "npx cross-env ENV=development webpack --watch",
-    "build:watch:prod": "npx cross-env ENV=production webpack --watch"
+    "build:watch:prod": "npx cross-env ENV=production webpack --watch",
+    "lint": "npm run lint:scripts && npm run lint:styles",
+    "lint:scripts": "eslint ./src",
+    "lint:styles": "stylelint --syntax scss ./src/**",
+    "lint:styles:fix": "stylelint --syntax scss ./src/** --fix",
+    "lint:scripts:fix": "eslint ./src --fix",
+    "lint-staged": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -30,7 +36,6 @@
     "crossenv": "^0.0.2-security",
     "css-loader": "^6.7.3",
     "dotenv": "^16.0.3",
-    "prettier": "^2.7.1",
     "reflect-metadata": "^0.1.13",
     "sass-loader": "^13.2.0",
     "sass": "^1.57.1",
@@ -41,7 +46,29 @@
     "tsyringe": "^4.7.0",
     "typescript": "^4.5.2",
     "webpack-cli": "^4.9.1",
-    "webpack": "^5.64.3"
+    "webpack": "^5.64.3",
+
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/eslint-plugin-tslint": "^4.33.0",
+    "@typescript-eslint/parser": "^4.28.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jasmine": "^4.1.2",
+    "eslint-plugin-jsdoc": "^35.5.1",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-unused-imports": "^1.1.5",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.7",
+    "prettier": "^2.7.1",
+    "prettier-eslint": "^12.0.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-idiomatic-order": "^8.1.0",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
+    "tslint": "^6.1.3"
   },
   "userscript": {
     "name": "Userscript TypeScript Template by Kenya-West",

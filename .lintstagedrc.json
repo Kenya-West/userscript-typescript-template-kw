@@ -1,0 +1,4 @@
+{
+    "*.ts": "eslint --cache",
+    "*.scss": "stylelint"
+}
