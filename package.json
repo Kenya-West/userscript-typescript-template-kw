@@ -10,9 +10,10 @@
     "build:watch:dev": "npx cross-env ENV=development webpack --watch",
     "build:watch:prod": "npx cross-env ENV=production webpack --watch",
     "lint": "npm run lint:scripts && npm run lint:styles",
+    "lint:fix": "npm run lint:scripts:fix && npm run lint:styles:fix",
     "lint:scripts": "eslint ./src",
-    "lint:styles": "stylelint --syntax scss ./src/**",
-    "lint:styles:fix": "stylelint --syntax scss ./src/** --fix",
+    "lint:styles": "stylelint --syntax scss ./src/assets/styles/**",
+    "lint:styles:fix": "stylelint --syntax scss ./src/assets/styles/** --fix",
     "lint:scripts:fix": "eslint ./src --fix",
     "lint-staged": "lint-staged"
   },
