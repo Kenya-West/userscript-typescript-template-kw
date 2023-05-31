@@ -6,9 +6,9 @@ type ButtonElementType = HTMLElement | HTMLButtonElement | HTMLDivElement;
 export abstract class ButtonAbstractControl extends ControlAbstract {
   abstract element: ButtonElementType;
 
-  constructor(params: ButtonControlParams, callback: Function, args: unknown) {
+  constructor(params: ButtonControlParams, callback: () => void, args: unknown) {
     super();
   }
 
-  abstract addEventListener(button: ButtonElementType, callback: Function, args: unknown): void;
+  abstract addEventListener(button: ButtonElementType, callback: () => void, args: unknown): void;
 }

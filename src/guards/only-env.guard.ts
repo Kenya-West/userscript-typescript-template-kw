@@ -1,9 +1,9 @@
 import { Environment, ScriptsEnvsModel } from "../environment/environment.model";
 
-export const EnvGuard = (envs: Environment[]) => (target: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
-  const originalMethod = descriptor.value;
+export const EnvGuard = (envs: Environment[]) => (target: object, propertyKey: string, descriptor: PropertyDescriptor) => {
+  const originalMethod = descriptor.value as () => void;
 
-  descriptor.value = function (...args: unknown[]) {
+  descriptor.value = function(...args: []): void {
     const url = new URL(location.href);
     if (envs.includes((process.env.scriptEnvs as unknown as ScriptsEnvsModel).ENV)) {
       originalMethod.apply(this, args);

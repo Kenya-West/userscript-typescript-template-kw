@@ -1,9 +1,10 @@
+/* eslint-disable max-len */
 import { Logger } from "../utils/logger";
 
-export const elementShouldNotExistGuard = (selector: string) => (target: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
-  const originalMethod = descriptor.value;
+export const elementShouldNotExistGuard = (selector: string) => (target: object, propertyKey: string, descriptor: PropertyDescriptor) => {
+  const originalMethod = descriptor.value as () => void;
 
-  descriptor.value = function (...args: any) {
+  descriptor.value = function(...args: []): void {
     if (selector) {
       const url = new URL(location.href);
 
@@ -25,10 +26,10 @@ export const elementShouldNotExistGuard = (selector: string) => (target: Object,
   return descriptor;
 };
 
-export const elementShouldExistGuard = (selector?: string) => (target: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
-  const originalMethod = descriptor.value;
+export const elementShouldExistGuard = (selector?: string) => (target: object, propertyKey: string, descriptor: PropertyDescriptor) => {
+  const originalMethod = descriptor.value as () => void;
 
-  descriptor.value = function (...args: any) {
+  descriptor.value = function(...args: []): void {
     if (selector) {
       if (document.querySelector(selector) !== null) {
         Logger.log(

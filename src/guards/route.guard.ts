@@ -1,10 +1,10 @@
 import { Routes } from "../routing/routes";
 import { Logger } from "../utils/logger";
 
-export const routeGuardExact = (route: Routes) => (target: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
-  const originalMethod = descriptor.value;
+export const routeGuardExact = (route: Routes) => (target: object, propertyKey: string, descriptor: PropertyDescriptor) => {
+  const originalMethod = descriptor.value as () => void;
 
-  descriptor.value = function (...args: unknown[]) {
+  descriptor.value = function(...args: []): void {
     const url = new URL(location.href);
     if (url.pathname + url.hash === route || url.href === route) {
       originalMethod.apply(this, args);
@@ -16,10 +16,10 @@ export const routeGuardExact = (route: Routes) => (target: Object, propertyKey: 
   return descriptor;
 };
 
-export const routeGuardIncludes = (route: Routes) => (target: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
-  const originalMethod = descriptor.value;
+export const routeGuardIncludes = (route: Routes) => (target: object, propertyKey: string, descriptor: PropertyDescriptor) => {
+  const originalMethod = descriptor.value as () => void;
 
-  descriptor.value = function (...args: unknown[]) {
+  descriptor.value = function(...args: []): void {
     const url = new URL(location.href);
     if (url.toString().includes(route)) {
       originalMethod.apply(this, args);

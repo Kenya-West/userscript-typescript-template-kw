@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ConsoleLogAction } from "../actions/console-log.action";
 import { ElementCollection } from "../element-find/element-collection";
 import { GetElementCollection } from "../element-find/element-find.service";

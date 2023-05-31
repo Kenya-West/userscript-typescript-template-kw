@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import { container, singleton } from "tsyringe";
 
 import { CustomMethodsService } from "./custom/custom-methods.service";
@@ -15,6 +16,15 @@ export class AppFacade {
     this.initCustomService();
   }
 
+  /**
+   * Includes SCSS styles in bundle
+   */
+  public enableStyles(): void {
+    const instance = container.resolve<StylesInjecterService>(StylesInjecterService);
+    instance.injectInit();
+    this.enabledFeatures.styles = true; // TODO: move to decorator
+  }
+
   private enableElementServices(): void {
     const instance = container.resolve<ElementFindService>(ElementFindService);
     this.enabledFeatures.element = true;
@@ -23,16 +33,7 @@ export class AppFacade {
     const instance = container.resolve<RenderService>(RenderService);
     this.enabledFeatures.render = true;
   }
-  private initCustomService() {
+  private initCustomService(): void {
     const instance = container.resolve<CustomMethodsService>(CustomMethodsService);
-  }
-
-  /**
-   * Includes SCSS styles in bundle
-   */
-  public enableStyles() {
-    const instance = container.resolve<StylesInjecterService>(StylesInjecterService);
-    instance.injectInit();
-    this.enabledFeatures.styles = true; // TODO: move to decorator
   }
 }

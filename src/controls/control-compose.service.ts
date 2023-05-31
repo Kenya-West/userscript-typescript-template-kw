@@ -8,14 +8,15 @@ import { ControlCollectionEntryModel, GuardsPayloadModel, RenderPlaceModel } fro
 
 @singleton()
 export class ControlComposeService {
-  constructor() {}
 
   public composeAndRender(controlModel: ControlCollectionEntryModel, renderAt?: RenderPlaceModel): SourceElementModel | RenderResult {
     const control = this.compose(controlModel);
     return this.render(control, renderAt ?? controlModel.defaultRenderAt, controlModel.guards);
   }
   public compose(controlModel: ControlCollectionEntryModel): ControlBase {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const control = new (controlModel as any).class(controlModel.controlParams, controlModel.callback, controlModel.args);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return control;
   }
   public render(control: ControlBase, renderAt: RenderPlaceModel, guards?: GuardsPayloadModel): SourceElementModel | RenderResult {
@@ -33,7 +34,7 @@ export class ControlComposeService {
 
     return renderService.render(renderPayload);
 
-    function getRenderElement(place: typeof renderAt.place) {
+    function getRenderElement(place: typeof renderAt.place): HTMLElement {
       return typeof place === "string"
         ? elementFindService.getElementByQuerySingle(place)
         : elementFindService.getElementByElementCollectionSingle(place.id);

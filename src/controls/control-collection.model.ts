@@ -10,7 +10,7 @@ export interface ControlCollectionModel {
 export interface ControlCollectionEntryModel<T = ControlBase, S = ControlParams> {
   class: T;
   controlParams: S;
-  callback: Function;
+  callback: () => void;
   args: unknown;
   guards?: GuardsPayloadModel;
   defaultRenderAt: RenderPlaceModel;

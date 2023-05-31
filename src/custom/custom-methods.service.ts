@@ -10,13 +10,13 @@ export class CustomMethodsService {
   constructor() {
     this.init();
   }
-  public init() {
+  public init(): void {
     this.startTimer(500);
 
     // Any logic to setup your custom script here
   }
 
-  public startTimer(time: number) {
+  public startTimer(time: number): void {
     this.interval = setInterval(() => {
       this.renderButton();
     }, time);
@@ -28,9 +28,10 @@ export class CustomMethodsService {
     }
   }
 
-  private renderButton() {
+  private renderButton(): void {
     const controlService = container.resolve<ControlComposeService>(ControlComposeService);
     // TODO: Remove `any`
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     controlService.composeAndRender(ControlCollection.exampleButton as any);
   }
 }
