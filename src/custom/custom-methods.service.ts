@@ -1,36 +1,36 @@
 import { container, singleton } from "tsyringe";
-import { ControlComposeService } from "../controls/control-compose.service";
+
 import { ControlCollection } from "../controls/control-collection";
-import { Logger } from "../utils/logger";
+import { ControlComposeService } from "../controls/control-compose.service";
 
 @singleton()
 export class CustomMethodsService {
-    protected interval?: NodeJS.Timer;
+  protected interval?: NodeJS.Timer;
 
-    constructor() {
-        this.init();
-    }
-    public init() {
-        this.startTimer(500);
+  constructor() {
+    this.init();
+  }
+  public init() {
+    this.startTimer(500);
 
-        // Any logic to setup your custom script here
-    }
+    // Any logic to setup your custom script here
+  }
 
-    public startTimer(time: number) {
-        this.interval = setInterval(() => {
-            this.renderButton();
-        }, time);
-    }
+  public startTimer(time: number) {
+    this.interval = setInterval(() => {
+      this.renderButton();
+    }, time);
+  }
 
-    public stopTimer(): void {
-        if (this.interval) {
-            clearInterval(this.interval);
-        }
+  public stopTimer(): void {
+    if (this.interval) {
+      clearInterval(this.interval);
     }
+  }
 
-    private renderButton() {
-        const controlService = container.resolve<ControlComposeService>(ControlComposeService);
-        // TODO: Remove `any`
-        controlService.composeAndRender(ControlCollection.exampleButton as any);
-    }
+  private renderButton() {
+    const controlService = container.resolve<ControlComposeService>(ControlComposeService);
+    // TODO: Remove `any`
+    controlService.composeAndRender(ControlCollection.exampleButton as any);
+  }
 }
