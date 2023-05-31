@@ -1,7 +1,7 @@
 export {};
 
 declare global {
-    interface Window {
-        yourValue: boolean;
-    }
+  interface Window {
+    yourValue: boolean;
+  }
 }

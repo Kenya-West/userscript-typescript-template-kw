@@ -6,5 +6,5 @@ export const SCRIPTENVS_PROPNAME = "scriptEnvs";
  * Pre-defined strings of .env files
  */
 export interface ScriptsEnvsModel {
-    ENV: Environment;
+  ENV: Environment;
 }

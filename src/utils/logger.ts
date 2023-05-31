@@ -1,30 +1,30 @@
 import { EnvGuard } from "../guards/only-env.guard";
 
 export class Logger {
-    @EnvGuard(["development", "production"])
-    public static logProd(message: string | number | Object, level: "log" | "info" | "warn" = "log") {
-        Logger.log(message, level)
-    }
+  public static error(message: string | number | object): void {
+    console.error(message);
+  }
+  @EnvGuard(["development", "production"])
+  public static logProd(message: string | number | object, level: "log" | "info" | "warn" = "log"): void {
+    Logger.log(message, level);
+  }
 
-    @EnvGuard(["development"])
-    public static log(message: string | number | Object, level: "log" | "info" | "warn" = "log") {
-        switch (level) {
-            case "log":
-                console.log(message);
-                break;
-            case "info":
-                console.info(message);
-                break;
-            case "warn":
-                console.warn(message);  
-                break;
-            default:
-                console.log(message);
-                break;
-        }
+  @EnvGuard(["development"])
+  public static log(message: string | number | object, level: "log" | "info" | "warn" = "log"): void {
+    switch (level) {
+      case "log":
+        console.log(message);
+        break;
+      case "info":
+        // eslint-disable-next-line no-console
+        console.info(message);
+        break;
+      case "warn":
+        console.warn(message);
+        break;
+      default:
+        console.log(message);
+        break;
     }
-    public static error(message: string | number | Object) {
-        console.error(message);
-    }
-
+  }
 }

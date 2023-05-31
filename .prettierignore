@@ -1,0 +1,7 @@
+node_modules/
+dist/
+coverage/
+.vscode/
+.ci/
+nginx/
+tsconfig*.json
