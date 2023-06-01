@@ -1,10 +1,11 @@
+import * as dotenv from "dotenv";
 import path from "path";
 import TerserPlugin from "terser-webpack-plugin";
-import * as dotenv from "dotenv";
-import { Configuration, BannerPlugin, DefinePlugin } from "webpack";
+import { BannerPlugin, Configuration, DefinePlugin } from "webpack";
+
+import * as packageJson from "./package.json";
 import { generateHeader, GeneratePathToUserscriptPlugin } from "./plugins/userscript.plugin";
 import { Environment } from "./src/environment/environment.model";
-import * as packageJson from "./package.json";
 
 const env = process.env.ENV as Environment || "development";
 const envContents = dotenv.config({ path: `.env.${env}`, override: true });
@@ -39,7 +40,7 @@ const configCommon: Configuration = {
             "process.env.scriptEnvs": envContentsString
         })
     ]
-}
+};
 
 const configUserscript: Configuration = {
     ...configCommon,
@@ -80,11 +81,11 @@ const configUserscript: Configuration = {
             extractComments: false,
         })],
     }
-}
+};
 
 const configDev: Configuration = {
     ...configCommon,
-    
+
     entry: {
         devBundle: { import: "./src/.empty", filename: "index.hot-reload.user.js" }
     },
