@@ -65,6 +65,13 @@ const configUserscript: Configuration = {
                   "sass-loader",
                 ],
             },
+            {
+                test: /\.html$/i,
+                loader: "html-loader",
+                options: {
+                    esModule: true,
+                },
+            },
         ],
     },
     optimization: {
