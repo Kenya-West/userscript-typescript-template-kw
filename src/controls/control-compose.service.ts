@@ -23,7 +23,7 @@ export class ControlComposeService {
     const renderService = container.resolve<RenderService>(RenderService);
     const elementFindService = container.resolve<ElementFindService>(ElementFindService);
     const renderPayload: RenderParamsModel = {
-      element: control.element,
+      element: control.element ?? (control as any).component, // TODO: fix this
       place: getRenderElement(renderAt.place),
       guards
     };
