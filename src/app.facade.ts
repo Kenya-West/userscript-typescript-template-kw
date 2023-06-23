@@ -1,6 +1,9 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { container, singleton } from "tsyringe";
 
+import { ControlCollectionEntryModel } from "./controls/control-collection.model";
+import { ControlComposeService } from "./controls/control-compose.service";
+import { modalControlEntry } from "./controls/modals/modal/modal-entries";
 import { CustomMethodsService } from "./custom/custom-methods.service";
 import { ElementFindService } from "./element-find/element-find.service";
 import { RenderService } from "./render/render.service";
@@ -22,6 +25,14 @@ export class AppFacade {
   public enableStyles(): void {
     const instance = container.resolve<StylesInjecterService>(StylesInjecterService);
     instance.injectInit();
+    this.enabledFeatures.styles = true; // TODO: move to decorator
+  }
+  /**
+   * Adds modal to DOM
+   */
+  public enableModal(): void {
+    const instance = container.resolve<ControlComposeService>(ControlComposeService);
+    instance.composeAndRender(modalControlEntry as unknown as ControlCollectionEntryModel);
     this.enabledFeatures.styles = true; // TODO: move to decorator
   }
 
