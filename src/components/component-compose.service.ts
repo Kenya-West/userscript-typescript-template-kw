@@ -3,27 +3,27 @@ import { container, singleton } from "tsyringe";
 import { ElementFindService } from "../element-find/element-find.service";
 import { RenderParamsModel, RenderResult, SourceElementModel } from "../render/render.model";
 import { RenderService } from "../render/render.service";
-import { ControlBase } from "./control-base.control";
-import { ControlCollectionEntryModel, GuardsPayloadModel, RenderPlaceModel } from "./control-collection.model";
+import { ComponentBase } from "./component-base.component";
+import { ComponentCollectionEntryModel, GuardsPayloadModel, RenderPlaceModel } from "./component-collection.model";
 
 @singleton()
-export class ControlComposeService {
+export class ComponentComposeService {
 
-  public composeAndRender(controlModel: ControlCollectionEntryModel, renderAt?: RenderPlaceModel): SourceElementModel | RenderResult {
-    const control = this.compose(controlModel);
-    return this.render(control, renderAt ?? controlModel.defaultRenderAt, controlModel.guards);
+  public composeAndRender(componentModel: ComponentCollectionEntryModel, renderAt?: RenderPlaceModel): SourceElementModel | RenderResult {
+    const component = this.compose(componentModel);
+    return this.render(component, renderAt ?? componentModel.defaultRenderAt, componentModel.guards);
   }
-  public compose(controlModel: ControlCollectionEntryModel): ControlBase {
+  public compose(componentModel: ComponentCollectionEntryModel): ComponentBase {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-    const control = new (controlModel as any).class(controlModel.controlParams, controlModel.callback, controlModel.args);
+    const component = new (componentModel as any).class(componentModel.componentParams, componentModel.callback, componentModel.args);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return control;
+    return component;
   }
-  public render(control: ControlBase, renderAt: RenderPlaceModel, guards?: GuardsPayloadModel): SourceElementModel | RenderResult {
+  public render(component: ComponentBase, renderAt: RenderPlaceModel, guards?: GuardsPayloadModel): SourceElementModel | RenderResult {
     const renderService = container.resolve<RenderService>(RenderService);
     const elementFindService = container.resolve<ElementFindService>(ElementFindService);
     const renderPayload: RenderParamsModel = {
-      element: control.element ?? (control as any).component, // TODO: fix this
+      element: component.element ?? (component as any).component, // TODO: fix this
       place: getRenderElement(renderAt.place),
       guards
     };

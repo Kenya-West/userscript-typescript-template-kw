@@ -51,8 +51,14 @@ export class RenderService {
     // put all checks in an array
     const checks: CheckFn[] = [
       () =>
-        params.guards?.routes !== undefined
-          ? params.guards?.routes.filter((route) => routeGuardIncludesFunction(route) === true)?.length > 0
+        params.guards?.routes !== undefined && Array.isArray(params.guards?.routes)
+          // check if array is empty
+          ? (params.guards?.routes as any).length === 0
+            // array is empty, it means any route is allowed
+            ? true
+            // array is not empty, find the matching route
+            : params.guards?.routes.filter((route) => routeGuardIncludesFunction(route) === true)?.length > 0
+          // no routes defined, so it means any route is allowed
           : true,
       () => params.guards?.elementShouldExist?.every((elem) => elementShouldExistGuardFunction(elem.selector) === true) ?? true,
       () => params.guards?.elementShouldNotExist?.every((elem) => elementShouldNotExistGuardFunction(elem.selector) === true) ?? true,

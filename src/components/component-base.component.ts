@@ -1,12 +1,12 @@
-import { ControlParams } from "./control.model";
-import { ControlAbstract } from "./control-abstract.control";
+import { ComponentParams } from "./component.model";
+import { ComponentAbstract } from "./component-abstract.component";
 
-export class ControlBase implements ControlAbstract {
+export class ComponentBase implements ComponentAbstract {
   public element: HTMLElement;
 
-  constructor(params: ControlParams | unknown) {
+  constructor(params: ComponentParams | unknown) {
     // narrow the type
-    const paramsDefault = params as ControlParams;
+    const paramsDefault = params as ComponentParams;
 
     this.element = this.createElement(paramsDefault.tag ?? "button");
     if (paramsDefault.classes) {

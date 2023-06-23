@@ -37,6 +37,7 @@
     "crossenv": "^0.0.2-security",
     "css-loader": "^6.7.3",
     "dotenv": "^16.0.3",
+    "html-loader": "^4.2.0",
     "reflect-metadata": "^0.1.13",
     "sass-loader": "^13.2.0",
     "sass": "^1.57.1",

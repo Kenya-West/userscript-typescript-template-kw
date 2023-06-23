@@ -1,7 +1,4 @@
-export {};
+declare module "*.css";
+declare module "*.scss";
+declare module "*.html";
 
-declare global {
-  interface Window {
-    yourValue: boolean;
-  }
-}
