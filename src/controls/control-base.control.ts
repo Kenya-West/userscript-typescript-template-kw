@@ -4,25 +4,28 @@ import { ControlAbstract } from "./control-abstract.control";
 export class ControlBase implements ControlAbstract {
   public element: HTMLElement;
 
-  constructor(params: ControlParams) {
-    this.element = this.createElement(params.tag ?? "button");
-    if (params.classes) {
-      this.setClasses(params.classes);
+  constructor(params: ControlParams | unknown) {
+    // narrow the type
+    const paramsDefault = params as ControlParams;
+
+    this.element = this.createElement(paramsDefault.tag ?? "button");
+    if (paramsDefault.classes) {
+      this.setClasses(paramsDefault.classes);
     }
-    if (params.text && !params.html) {
-      this.setInnerText(params.text);
+    if (paramsDefault.text && !paramsDefault.html) {
+      this.setInnerText(paramsDefault.text);
     }
-    if (params.html && !params.text) {
-      this.setInnerHtml(params.html);
+    if (paramsDefault.html && !paramsDefault.text) {
+      this.setInnerHtml(paramsDefault.html);
     }
-    if (params.attributes) {
-      this.setAttributes(params.attributes);
+    if (paramsDefault.attributes) {
+      this.setAttributes(paramsDefault.attributes);
     }
-    if (params.styles) {
-      this.setStyles(params.styles);
+    if (paramsDefault.styles) {
+      this.setStyles(paramsDefault.styles);
     }
-    if (params.id) {
-      this.setId(params.id);
+    if (paramsDefault.id) {
+      this.setId(paramsDefault.id);
     }
   }
 
