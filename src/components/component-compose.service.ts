@@ -4,18 +4,21 @@ import { ElementFindService } from "../element-find/element-find.service";
 import { RenderParamsModel, RenderResult, SourceElementModel } from "../render/render.model";
 import { RenderService } from "../render/render.service";
 import { ComponentBase } from "./component-base.component";
-import { ComponentCollectionEntryModel, GuardsPayloadModel, RenderPlaceModel } from "./component-collection.model";
+import { ComponentCollectionUnitModel, GuardsPayloadModel, RenderPlaceModel } from "./component-collection.model";
 
 @singleton()
 export class ComponentComposeService {
 
-  public composeAndRender(componentModel: ComponentCollectionEntryModel, renderAt?: RenderPlaceModel): SourceElementModel | RenderResult {
+  public composeAndRender(componentModel: ComponentCollectionUnitModel, renderAt?: RenderPlaceModel): SourceElementModel | RenderResult {
     const component = this.compose(componentModel);
     return this.render(component, renderAt ?? componentModel.defaultRenderAt, componentModel.guards);
   }
-  public compose(componentModel: ComponentCollectionEntryModel): ComponentBase {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-    const component = new (componentModel as any).class(componentModel.componentParams, componentModel.callback, componentModel.args);
+  public compose(componentModel: ComponentCollectionUnitModel): ComponentBase {
+    const classType = componentModel.class;
+    container.register("MyClass", { useClass: componentModel.class, singleton: componentModel.guards?.unique ?? false });
+    const component = container.resolve<ComponentBase>(classType);
+
+    // const component = new componentModel.class(componentModel.componentParams);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return component;
   }

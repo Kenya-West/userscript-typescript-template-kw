@@ -1,14 +1,5 @@
 import { GuardsPayloadModel } from "../controls/control-collection.model";
 
-export interface RenderDataModel {
-  beforeElem: HTMLElement;
-  afterElem?: HTMLElement;
-  querySelector?: string;
-  class: string[];
-  id?: string;
-  styles: { key: string; value: string | number }[];
-}
-
 export interface RenderParamsModel {
   element: SourceElementModel;
   place: SourceElementModel;

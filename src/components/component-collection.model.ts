@@ -3,15 +3,13 @@ import { Routes } from "../routing/routes";
 import { ComponentParams } from "./component.model";
 import { ComponentBase } from "./component-base.component";
 
-export interface ComponentCollectionModel {
-  [key: string]: ComponentCollectionEntryModel<any, unknown | never>;
+export interface ComponentCollectionListModel {
+  [key: string]: ComponentCollectionUnitModel<any, unknown | never>;
 }
 
-export interface ComponentCollectionEntryModel<T = ComponentBase, S = ComponentParams> {
+export interface ComponentCollectionUnitModel<T = ComponentBase, S = ComponentParams> {
   class: T;
   componentParams: S;
-  callback: () => void;
-  args: unknown;
   guards?: GuardsPayloadModel;
   defaultRenderAt: RenderPlaceModel;
 }
